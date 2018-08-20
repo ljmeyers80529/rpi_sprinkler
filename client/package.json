@@ -12,5 +12,6 @@
     "build": "SET PORT=4012 && react-scripts build",
     "test": "SET PORT=4012 && react-scripts test --env=jsdom",
     "eject": "SET PORT=4012 && react-scripts eject"
-  }
+  },
+  "proxy": "http://localhost:4011"
 }
