@@ -15,5 +15,8 @@
   "devDependencies": {
     "concurrently": "^3.6.1",
     "nodemon": "^1.18.3"
+  },
+  "dependencies": {
+    "sqlite3": "^4.0.2"
   }
 }
