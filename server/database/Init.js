@@ -6,9 +6,7 @@ const programCreateTable = `CREATE TABLE IF NOT EXISTS Program
                             (id INTEGER PRIMARY KEY,
                             name TEXT NOT NULL,
                             startDate INTEGER NOT NULL,
-                            endDate INTEGER NOT NULL,
-                            startTime INTEGER NOT NULL,
-                            endTime INTEGER NOT NULL)`;
+                            endDate INTEGER NOT NULL)`;
 
 const sprinklerCreateTable = `CREATE TABLE IF NOT EXISTS Sprinkler
                                 (id INTEGER PRIMRY KEY,
@@ -19,11 +17,11 @@ const sprinklerCreateTable = `CREATE TABLE IF NOT EXISTS Sprinkler
                                 FOREIGN KEY(programId) REFERENCES Program(id))`;
 
 // execute non-query SQL statements.
-const ExecuteNonQuery = (sql, ...params) => {
+const ExecuteNonQuery = (sql) => {
     return new Promise((resolve, reject) => {
-        db.run(sql, params, (err) => {
+        db.run(sql, (err) => {
             if (!err) {
-                resolve(this.changes);
+                resolve();
             } else {
                 reject(err);
             }
@@ -32,9 +30,9 @@ const ExecuteNonQuery = (sql, ...params) => {
 };
 
 // execute SELECT statements.
-const ExecuteQuery = (sql, ...params) => {
+const ExecuteQuery = (sql) => {
     return new Promise((resolve, reject) => {
-        db.all(sql, params, (err, rows) => {
+        db.all(sql, (err, rows) => {
             if (!err) {
                 resolve(rows);
             } else {
@@ -45,9 +43,9 @@ const ExecuteQuery = (sql, ...params) => {
 };
 
 // execute command that returns a single data element or row.
-const ExecuteScalar = (sql, ...params) => {
+const ExecuteScalar = (sql) => {
     return new Promise((resolve, reject) => {
-        db.get(sql, params, (err, row) => {
+        db.get(sql, (err, row) => {
             if (!err) {
                 resolve(row);
             } else {
