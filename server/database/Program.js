@@ -1,9 +1,12 @@
-const { ExecuteNonQuery, ExecuteQuery } = require('./Init');
+const { ExecuteNonQuery, ExecuteQuery } = require('./Database');
+const { timeToInteger } = require('../utils/Utils');
 
 const AddNewProgram = (name, startDate, endDate) => {
-    console.log(`${startDate} -- ${endDate}`);
+    const sTime = timeToInteger(startDate);
+    const eTime = timeToInteger(endDate);
+
     const newProgram = `INSERT INTO Program (name, startDate, endDate)
-                        VALUES ('${name}', ${startDate.getTime()}, ${endDate.getTime()})`;
+                        VALUES ('${name}', ${sTime}, ${eTime})`;
     return ExecuteNonQuery(newProgram);
 }
 

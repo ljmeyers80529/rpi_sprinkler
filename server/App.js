@@ -1,4 +1,4 @@
-require('./database/Init');
+require('./database/Database');
 const { AddNewProgram, GetProgramData } = require('./database/Program');
 
 // const sDate = new Date();
