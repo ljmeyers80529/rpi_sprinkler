@@ -15,16 +15,16 @@ const sprinklerCreateTable = `CREATE TABLE IF NOT EXISTS Sprinkler
                               maxDuration INTEGER NOT NULL,
                               manualTimeOn INTEGER NOT NULL,
                               skipRain INTEGER NOT NULL,
-                              useWeatherConditions INTEGER NOT NULL,
                               FOREIGN KEY(programId) REFERENCES Program(id))`;
 
 const stateCreateTable = `CREATE TABLE IF NOT EXISTS State
-                          (RainDelay INTEGER NOT NULL,
-                           Autorun INTEGER NOU NULL)`;
+                          (rainDelay INTEGER NOT NULL,
+                          useWeatherConditions INTEGER NOT NULL,
+                          autorun INTEGER NOU NULL)`;
 
 const stateCheckExists = `SELECT RainDelay FROM State`;
 
-const statePrePopulate = `INSERT INTO State (RainDelay, AutoRun) VALUES (0, false)`;
+const statePrePopulate = `INSERT INTO State (rainDelay, useWeatherConditions, autoRun) VALUES (0, true, false)`;
 
 // execute non-query SQL statements.
 const ExecuteNonQuery = (sql) => {
