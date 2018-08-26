@@ -5,14 +5,15 @@ const db = new sqlite3.Database('./rpiSprinkler.db', sqlite3.OPEN_CREATE | sqlit
 const programCreateTable = `CREATE TABLE IF NOT EXISTS Program
                             (id INTEGER PRIMARY KEY,
                             name TEXT NOT NULL,
-                            startDate INTEGER NOT NULL,
-                            endDate INTEGER NOT NULL)`;
+                            startDateTime INTEGER NOT NULL,
+                            endDateTime INTEGER NOT NULL)`;
 
 const sprinklerCreateTable = `CREATE TABLE IF NOT EXISTS Sprinkler
                               (id INTEGER PRIMRY KEY,
                               programId INTEGER NOT NULL,
                               minDuration INTEGER NOT NULL,
                               maxDuration INTEGER NOT NULL,
+                              manualTimeOn INTEGER NOT NULL,
                               skipRain INTEGER NOT NULL,
                               useWeatherConditions INTEGER NOT NULL,
                               FOREIGN KEY(programId) REFERENCES Program(id))`;
@@ -70,7 +71,7 @@ db.serialize(async() => {
     await ExecuteNonQuery(programCreateTable);
     await ExecuteNonQuery(sprinklerCreateTable);
     await ExecuteNonQuery(stateCreateTable);
-    let entry = await ExecuteScalar(stateCheckExists);
+    const entry = await ExecuteScalar(stateCheckExists);
     if (!entry) {
         await ExecuteNonQuery(statePrePopulate);
     }
