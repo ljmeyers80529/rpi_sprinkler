@@ -14,14 +14,15 @@ const sprinklerCreateTable = `CREATE TABLE IF NOT EXISTS Sprinkler
                               minDuration INTEGER NOT NULL,
                               maxDuration INTEGER NOT NULL,
                               manualTimeOn INTEGER NOT NULL,
+                              allowedDays INTEGER NOT NULL,
                               skipRain INTEGER NOT NULL,
                               FOREIGN KEY(programId) REFERENCES Program(id))`;
 
 const stateCreateTable = `CREATE TABLE IF NOT EXISTS State
                           (rainDelay INTEGER NOT NULL,
-                          useWeatherConditions INTEGER NOT NULL,
                           zeroRunTemperature INTEGER NOT NULL,
-                          autorun INTEGER NOU NULL)`;
+                          useWeatherConditions INTEGER NOT NULL,
+                          autorun INTEGER NOT NULL)`;
 
 const stateCheckExists = `SELECT RainDelay FROM State`;
 
