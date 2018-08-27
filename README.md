@@ -17,4 +17,6 @@ Sprinler control system using a Raspberry Pi 3B+ and a 16 channel relay system.
 
 **sqlite3**, relation SQL database since mongo is limited on the reaspberry pi.
 
+**cron**, task scheduler.
+
 **express**, minimalist web framework.
