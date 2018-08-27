@@ -17,6 +17,7 @@
     "nodemon": "^1.18.3"
   },
   "dependencies": {
+    "cron": "^1.4.1",
     "sqlite3": "^4.0.2"
   }
 }
