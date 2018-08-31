@@ -23,6 +23,8 @@ Sprinler control system using a Raspberry Pi 3B+ and a 16 channel relay system.
 
 **express**, minimalist web framework.
 
+**socket.io**, real time async commnications.
+
 #### client
 
 ##### All modes
