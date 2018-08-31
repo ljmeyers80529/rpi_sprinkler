@@ -22,3 +22,9 @@ Sprinler control system using a Raspberry Pi 3B+ and a 16 channel relay system.
 **moment**, a date/time library.
 
 **express**, minimalist web framework.
+
+#### client
+
+##### All modes
+
+**socket.io-client**, client side socket.io.
