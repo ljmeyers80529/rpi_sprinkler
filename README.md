@@ -13,6 +13,10 @@ Sprinler control system using a Raspberry Pi 3B+ and a 16 channel relay system.
 
 **concurrently**, to execute both node and react applications without usin seperate terminals.
 
+**expect**, testing framework matchers.
+
+**mocha**, testing framework.
+
 ##### All modes
 
 **sqlite3**, relation SQL database since mongo is limited on the reaspberry pi.
