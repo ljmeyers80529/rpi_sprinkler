@@ -1,5 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./rpiSprinkler.db', sqlite3.OPEN_CREATE | sqlite3.OPEN_READWRITE);
+const db = new sqlite3.Database(process.env.RPISQLDB, sqlite3.OPEN_CREATE | sqlite3.OPEN_READWRITE);
 
 // table definitions.
 const programCreateTable = `CREATE TABLE IF NOT EXISTS Program
@@ -28,7 +28,7 @@ const stateCheckExists = `SELECT RainDelay FROM State`;
 
 const statePrePopulate = `INSERT INTO State (rainDelay, useWeatherConditions, 
                             zeroRunTemperature, autoRun) 
-                          VALUES (0, 50, true, false)`;
+                          VALUES (0, true, 50, false)`;
 
 // execute non-query SQL statements.
 const ExecuteNonQuery = (sql) => {
