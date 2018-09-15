@@ -1,4 +1,4 @@
-const { ExecuteNonQuery, ExecuteQuery } = require('./Database');
+const { ExecuteNonQuery, ExecuteQuery, ExecuteScalar } = require('./Database');
 const { timeToInteger } = require('../utils/Utils');
 
 const AddNewProgram = (name, startDate, endDate) => {
@@ -16,4 +16,20 @@ const GetProgramData = () => {
     return ExecuteQuery(getData);
 }
 
-module.exports = { AddNewProgram, GetProgramData };
+const GetProgramEntry = (id) => {
+    const getData = `SELECT name, startDateTime, endDateTime
+                     FROM Program
+                     WHERE id = ${id}`;
+    return ExecuteScalar(getData);
+}
+
+const UpdateProgram = async (id, name, startDate, endDate) => {
+    const updateProgram = `UPDATE Program SET
+                           name='${name}',
+                           startDateTime=${startDate},
+                           endDateTime=${endDate}
+                           WHERE id=${id}`;
+    return ExecuteNonQuery(updateProgram);
+}
+
+module.exports = { AddNewProgram, GetProgramData, GetProgramEntry, UpdateProgram };
