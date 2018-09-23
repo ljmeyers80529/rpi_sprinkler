@@ -3,20 +3,18 @@ const db = new sqlite3.Database(process.env.RPISQLDB, sqlite3.OPEN_CREATE | sqli
 
 // table definitions.
 const programCreateTable = `CREATE TABLE IF NOT EXISTS Program
-                            (id INTEGER PRIMARY KEY,
-                            name TEXT NOT NULL,
+                            (name TEXT NOT NULL,
                             startDateTime INTEGER NOT NULL,
                             endDateTime INTEGER NOT NULL)`;
 
 const sprinklerCreateTable = `CREATE TABLE IF NOT EXISTS Sprinkler
-                              (id INTEGER PRIMRY KEY,
-                              programId INTEGER NOT NULL,
+                              (program INTEGER NOT NULL,
                               minDuration INTEGER NOT NULL,
                               maxDuration INTEGER NOT NULL,
                               manualTimeOn INTEGER NOT NULL,
                               allowedDays INTEGER NOT NULL,
                               skipRain INTEGER NOT NULL,
-                              FOREIGN KEY(programId) REFERENCES Program(id))`;
+                              FOREIGN KEY(program) REFERENCES Program(id))`;
 
 const stateCreateTable = `CREATE TABLE IF NOT EXISTS State
                           (rainDelay INTEGER NOT NULL,

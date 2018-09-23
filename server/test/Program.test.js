@@ -1,9 +1,9 @@
 require('../config/config');
 const moment = require('moment');
 const expect = require('expect');
-const { db, ExecuteNonQuery } = require('../database/Database');
-const program = require('../database/Program');
 const utils = require('../utils/Utils');
+const database = require('../database/Database');
+const program = require('../database/Program');
 const { LastRowID } = require('../database/Common');
 
 describe('Database program table...', () => {
@@ -11,8 +11,8 @@ describe('Database program table...', () => {
     let eDate = utils.dateTimeOffset(sDate, 7, 11, 49).getTime();
 
     before(() => {
-        db.serialize(() => {
-            ExecuteNonQuery('DELETE FROM Program');
+        database.db.serialize(() => {
+            database.ExecuteNonQuery('DELETE FROM Program');
         });
     });
 
@@ -43,7 +43,7 @@ describe('Database program table...', () => {
         let val = await program.GetProgramData();
         expect(val.length >=2 ).toBeTruthy();
         let element = val[1];
-        const id = element.id;
+        const id = element.rowid;
         await program.UpdateProgram(id, 'Program Updated', element.startDateTime, element.endDateTime);
         val = await program.GetProgramData();
         expect(val[1]).toMatchObject({name:'Program Updated', startDateTime: sDate, endDateTime: eDate});

@@ -11,7 +11,7 @@ const AddNewProgram = (name, startDate, endDate) => {
 }
 
 const GetProgramData = () => {
-    const getData = `SELECT id, name, startDateTime, endDateTime
+    const getData = `SELECT rowid, name, startDateTime, endDateTime
                      FROM Program`;
     return ExecuteQuery(getData);
 }
@@ -19,7 +19,7 @@ const GetProgramData = () => {
 const GetProgramEntry = (id) => {
     const getData = `SELECT name, startDateTime, endDateTime
                      FROM Program
-                     WHERE id = ${id}`;
+                     WHERE rowid = ${id}`;
     return ExecuteScalar(getData);
 }
 
@@ -28,7 +28,7 @@ const UpdateProgram = async (id, name, startDate, endDate) => {
                            name='${name}',
                            startDateTime=${startDate},
                            endDateTime=${endDate}
-                           WHERE id=${id}`;
+                           WHERE rowid=${id}`;
     return ExecuteNonQuery(updateProgram);
 }
 
