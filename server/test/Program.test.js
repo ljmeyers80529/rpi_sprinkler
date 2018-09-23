@@ -10,10 +10,8 @@ describe('Database program table...', () => {
     let sDate = new Date().getTime();
     let eDate = utils.dateTimeOffset(sDate, 7, 11, 49).getTime();
 
-    before(() => {
-        database.db.serialize(() => {
-            database.ExecuteNonQuery('DELETE FROM Program');
-        });
+    before(async () => {
+        await database.ExecuteNonQuery('DELETE FROM Program');
     });
 
     it('should be empty...', async () => {
