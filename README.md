@@ -29,6 +29,8 @@ Sprinler control system using a Raspberry Pi 3B+ and a 16 channel relay system.
 
 **socket.io**, real time async commnications.
 
+**axios**, promise based HTTP client.
+
 #### client
 
 ##### All modes
