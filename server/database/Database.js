@@ -9,12 +9,13 @@ const programCreateTable = `CREATE TABLE IF NOT EXISTS Program
 
 const sprinklerCreateTable = `CREATE TABLE IF NOT EXISTS Sprinkler
                               (program INTEGER NOT NULL,
+                              valveNumber INTEGER NOT NULL,
                               minDuration INTEGER NOT NULL,
                               maxDuration INTEGER NOT NULL,
                               manualTimeOn INTEGER NOT NULL,
                               allowedDays INTEGER NOT NULL,
                               skipRain INTEGER NOT NULL,
-                              FOREIGN KEY(program) REFERENCES Program(id))`;
+                              FOREIGN KEY(program) REFERENCES Program(rowid))`;
 
 const stateCreateTable = `CREATE TABLE IF NOT EXISTS State
                           (rainDelay INTEGER NOT NULL,

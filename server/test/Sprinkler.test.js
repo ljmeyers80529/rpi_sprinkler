@@ -6,8 +6,8 @@ const program = require('../database/Program');
 const { LastRowID } = require('../database/Common');
 
 describe('Datebase sprinkler table...', () => {
-    let initial = {program: 0, minDuration: 10, maxDuration: 30, manualTimeOn: 2, allowedDays: 1, skipRain: 0}
-    let updated = {program: 0, minDuration: 5, maxDuration: 45, manualTimeOn: 5, allowedDays: 1, skipRain: 0}
+    let initial = {program: 0, valveNumber: 1, minDuration: 10, maxDuration: 30, manualTimeOn: 2, allowedDays: 1, skipRain: 0}
+    let updated = {program: 0, valveNumber: 5, minDuration: 5, maxDuration: 45, manualTimeOn: 5, allowedDays: 1, skipRain: 0}
     let addedId;
 
     before( async () => {
@@ -19,20 +19,20 @@ describe('Datebase sprinkler table...', () => {
     });
 
     it('should add a new sprinkler entry...', async () => {
-        await sprinkler.AddNewSprinkler(initial.program, initial.minDuration, initial.maxDuration, initial.manualTimeOn, initial.allowedDays, initial.skipRain);
+        await sprinkler.AddNewSprinkler(initial.program, initial.valveNumber, initial.minDuration, initial.maxDuration, initial.manualTimeOn, initial.allowedDays, initial.skipRain);
         addedId = await LastRowID();
         const entry = await sprinkler.GetSprinklerEntry(addedId);
         expect(entry).toMatchObject(initial);
     });
 
     it('should update a sprinkler entry...', async () => {
-        await sprinkler.UpdateSprinkler(addedId, updated.program, updated.minDuration, updated.maxDuration, updated.manualTimeOn, updated.allowedDays, updated.skipRain);
+        await sprinkler.UpdateSprinkler(addedId, updated.program, updated.valveNumber, updated.minDuration, updated.maxDuration, updated.manualTimeOn, updated.allowedDays, updated.skipRain);
         const entry = await sprinkler.GetSprinklerEntry(addedId);
         expect(entry).toMatchObject(updated);
     });
 
     it('should remove a sprinkler entry...', async () => {
-        await sprinkler.AddNewSprinkler(initial.program, initial.minDuration, initial.maxDuration, initial.manualTimeOn, initial.allowedDays, initial.skipRain);
+        await sprinkler.AddNewSprinkler(initial.program, initial.valveNumber, initial.minDuration, initial.maxDuration, initial.manualTimeOn, initial.allowedDays, initial.skipRain);
         let entry = await sprinkler.GetSprinkler();
         expect(entry.length === 2).toBeTruthy();
         await sprinkler.DeleteSprinkler(entry[0].rowid);

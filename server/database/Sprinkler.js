@@ -9,25 +9,26 @@ const GetSprinkler = () => {
 
 const GetSprinklerEntry = (id) => {
     const getData = `SELECT program, minDuration, maxDuration, manualTimeOn,
-                     allowedDays, skipRain
+                     allowedDays, skipRain, valveNumber
                      FROM Sprinkler
                      WHERE rowid = ${id}`;
     return ExecuteScalar(getData);
 }
 
-const AddNewSprinkler = (progamId, minimumDuration, maximumDuration, manualOnTime, 
+const AddNewSprinkler = (progamId, valveNum, minimumDuration, maximumDuration, manualOnTime, 
                          allowedDays, skipRainDelay) => {
     const newSprinkler = `INSERT INTO Sprinkler (program, minDuration, maxDuration,
-                            manualTimeOn, allowedDays, skipRain)
+                            manualTimeOn, allowedDays, skipRain, valveNumber)
                           VALUES (${progamId}, ${minimumDuration}, ${maximumDuration},
-                            ${manualOnTime}, ${allowedDays}, ${skipRainDelay})`;
+                            ${manualOnTime}, ${allowedDays}, ${skipRainDelay}, ${valveNum})`;
     return ExecuteNonQuery(newSprinkler);
 };
 
-const UpdateSprinkler = (id, progamId, minimumDuration, maximumDuration, manualOnTime, 
+const UpdateSprinkler = (id, progamId, valveNum, minimumDuration, maximumDuration, manualOnTime, 
                          allowedDays, skipRainDelay) => {
     const updateSprinkler = `UPDATE Sprinkler SET
                              program = ${progamId},
+                             valveNumber = ${valveNum},
                              minDuration = ${minimumDuration},
                              maxDuration = ${maximumDuration},
                              manualTimeOn = ${manualOnTime},
