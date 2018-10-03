@@ -1,5 +1,6 @@
 const { ExecuteNonQuery, ExecuteQuery, ExecuteScalar } = require('./Database');
 const { timeToInteger } = require('../utils/Utils');
+const moment = require('moment');
 
 const AddNewProgram = (name, startDate, endDate) => {
     const sTime = timeToInteger(startDate);
@@ -32,4 +33,11 @@ const UpdateProgram = async (id, name, startDate, endDate) => {
     return ExecuteNonQuery(updateProgram);
 }
 
-module.exports = { AddNewProgram, GetProgramData, GetProgramEntry, UpdateProgram };
+const GetProgramIdUsingTodaysDate = async () => {
+    const today = new Date(moment().local()).getTime();
+    const getId = `SELECT rowid FROM Program
+                   WHERE endDateTime >= ${today} AND startDateTime <= ${today}`;
+    return ExecuteScalar(getId);
+}
+
+module.exports = { AddNewProgram, GetProgramData, GetProgramEntry, UpdateProgram, GetProgramIdUsingTodaysDate };

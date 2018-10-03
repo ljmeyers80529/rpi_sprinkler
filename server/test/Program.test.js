@@ -46,4 +46,9 @@ describe('Database program table...', () => {
         val = await program.GetProgramData();
         expect(val[1]).toMatchObject({name:'Program Updated', startDateTime: sDate, endDateTime: eDate});
     });
+
+    it("should get program entry based on today's date...", async () => {
+        const id = (await program.GetProgramIdUsingTodaysDate()).rowid;
+        expect(id).toBe(1);
+    });
 });
